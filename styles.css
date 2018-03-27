@@ -1,0 +1,39 @@
+:root{
+    --primary-color: rgb(11, 82, 145); 
+    --secondary-color: rgb(85, 3, 92); 
+    --contrast-color: rgb(210, 207, 209); 
+}
+body {
+    background-color: var(--contrast-color); 
+}
+#app {
+    background-color: var(--primary-color); 
+    color: var(--contrast-color); 
+    text-align: center; 
+    width: 600px; 
+}
+/*container for the list*/
+#done, #todo {
+
+}
+/*container for the list items*/
+.todo, .done {
+    background-color: var(--secondary-color);
+    border-color: var(--contrast-color); 
+    border-style: solid; 
+    display: inline-block; 
+
+    width: 200px;  
+}
+.todo {
+    text-decoration: underline;
+}
+.todo:hover {
+    text-decoration: line-through; 
+}
+.done {
+    text-decoration: line-through;
+}
+.done:hover {
+    text-decoration: underline; 
+}
