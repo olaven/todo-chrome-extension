@@ -1,5 +1,7 @@
 const KEY_ENTER = 13; 
 
+//NOTE: REFACTOR 
+
 let app = new Vue({
     el : "#app",
     data : {
@@ -10,43 +12,54 @@ let app = new Vue({
     }, 
     init(){
         chrome.storage.sync.get(["todos"], result => {
-            console.log(result.todos); 
-            app.todos = app.todos.concat(result.todos); 
+            for(todo of result.todos){
+                app.setTodo(todo); 
+            } 
         });
         chrome.storage.sync.get(["done"], result => {
-            app.done = app.done.concat(result.done); 
+            for(todo of result.done){
+                app.setDone(todo); 
+            }
         });
     },
     methods : {
         handleKeyDown : (event) => {
-            if(event.keyCode == KEY_ENTER){
+            if(event.keyCode == KEY_ENTER && app.input != ""){
                 app.setTodo(app.input); 
             } 
         }, 
         setTodo : (todo) => {
+            //this is an event, not the raw todo-string  
             if(typeof todo != "string"){
-                //this is an event, not the raw todo-string  
                 todo = todo.target.innerHTML; 
             }
             app.input = "";
             //filter from done
-            app.done = app.done.filter(d => d !== todo); 
+            app.done = app.done.filter(t => t !== todo); 
             app.todos.push(todo); 
 
             app.updateStorage(); 
         }, 
-        setDone : (event) => {
-            let todo = event.target.innerHTML; 
+        setDone : (todo) => {
+            if(todo instanceof Event){
+                todo = todo.target.innerHTML; 
+            }
             //filter from todos and add to done 
             app.todos = app.todos.filter(t => t !== todo); 
             app.done.unshift(todo);
 
             app.updateStorage(); 
+        },
+        cleanDone : () => {
+            app.done = []; 
+            app.updateStorage();   
         }, 
         updateStorage: () => {
+            console.log(app.done); 
             chrome.storage.sync.set({ todos: app.todos });
             chrome.storage.sync.set({ done: app.done });
-        }
+        }, 
     }
 }); 
+
 

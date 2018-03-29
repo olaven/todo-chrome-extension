@@ -9,7 +9,7 @@
 
 <body>
     <div id="app" v-on:keyDown="handleKeyDown">
-        <h1>{{header}}</h1>
+        <h1 class="row">{{header}}</h1>
         <div class="row">
             <span class="col-md-2"></span>
             <input v-model="input" class="form-control col-md-8" type="text" />
@@ -21,8 +21,11 @@
         </ul>
         <h2>Done</h2>
         <ul id="done">
-            <li v-for="d in done" v-on:click="setTodo" class="done list-group-item">{{d}}</li>
+            <li v-for="todo in done" v-on:click="setTodo" class="done list-group-item">{{todo}}</li>
         </ul>
+        <div class="row">
+            <button v-on:click="cleanDone" class="col-md-2 btn-warning">Clean Done</button>
+        </div>
     </div>
 </body>
 <!--using Vue version compatible with Chromes Content Security Policy
