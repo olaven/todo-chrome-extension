@@ -1,16 +1,13 @@
 {
-    // Required
-    "manifest_version": 2,
-    "name": "Todo",
-    "version": "0.1",
+  "manifest_version": 2,
+  "name": "Todo",
+  "version": "0.1",
+  "permissions": ["storage"],
 
-    "browser_action": {
-        "default_popup": "todo.html"
-    },
+  "browser_action": {
+    "default_popup": "todo.html"
+  },
+  "description": "A simple todo app",
 
-    // Recommended
-    "description": "A simple todo app",
-
-    // Optional
-    "author": "@olaven"
+  "author": "@olaven"
 }
