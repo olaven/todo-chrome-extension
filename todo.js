@@ -29,25 +29,12 @@ let app = new Vue({
             } 
         }, 
         setTodo : (todo) => {
-            //this is an event, not the raw todo-string  
-            if(typeof todo != "string"){
-                todo = todo.target.innerHTML; 
-            }
-            app.input = "";
-            //filter from done
-            app.done = app.done.filter(t => t !== todo); 
-            app.todos.push(todo); 
-
+            app.set(todo, app.done, app.todos);
             app.updateStorage(); 
         }, 
         setDone : (todo) => {
-            if(todo instanceof Event){
-                todo = todo.target.innerHTML; 
-            }
-            //filter from todos and add to done 
-            app.todos = app.todos.filter(t => t !== todo); 
-            app.done.unshift(todo);
-
+            app.input = ""; 
+            app.set(todo, app.todos, app.done); 
             app.updateStorage(); 
         },
         cleanDone : () => {
@@ -55,15 +42,24 @@ let app = new Vue({
             app.updateStorage();   
         }, 
         updateStorage: () => {
-            console.log("todos: ");
-            console.log(app.todos);
-            console.log("done: "); 
-            console.log(app.done);
+            console.log("-------------------------------"); 
+            console.log(app.todos); 
+            console.log(app.done); 
 
             chrome.storage.sync.set({ todos: app.todos });
             chrome.storage.sync.set({ done: app.done });
+        },
+        //sets todo and removes from done or oposite + application specific details 
+        set : (item, setFrom, setTo) => {
+            if(item instanceof Event){
+                item = item.target.innerHTML; 
+            }
+            app.moveBetweenArrays(item, setFrom, setTo); 
         }, 
+        //adds item to one array and removes from the other 
+        moveBetweenArrays: (item, removeFrom, addTo) => {
+            removeFrom.filter(x => x !== item); 
+            addTo.push(item); 
+        }
     }
 }); 
-
-
