@@ -1,6 +1,5 @@
 const KEY_ENTER = 13; 
 
-//NOTE: REFACTOR 
 
 let app = new Vue({
     el : "#app",
