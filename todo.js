@@ -5,8 +5,8 @@ const KEY_ENTER = 13;
 let app = new Vue({
     el : "#app",
     data : {
-        header : "Todo app", 
         input : "",
+        inputPlaceholder : "Enter todo here",
         todos : [], 
         done : []
     }, 
@@ -55,7 +55,11 @@ let app = new Vue({
             app.updateStorage();   
         }, 
         updateStorage: () => {
-            console.log(app.done); 
+            console.log("todos: ");
+            console.log(app.todos);
+            console.log("done: "); 
+            console.log(app.done);
+
             chrome.storage.sync.set({ todos: app.todos });
             chrome.storage.sync.set({ done: app.done });
         }, 

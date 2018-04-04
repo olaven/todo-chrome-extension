@@ -13,10 +13,11 @@ body {
     text-align: center; 
     width: 600px; 
 }
-/*container for the list*/
-#done, #todo {
 
+#input{
+    margin-top: 15px; 
 }
+
 /*container for the list items*/
 .todo, .done {
     background-color: var(--secondary-color);

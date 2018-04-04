@@ -9,11 +9,10 @@
 
 <body>
     <div id="app" v-on:keyDown="handleKeyDown">
-        <h1 class="row">{{header}}</h1>
         <div class="row">
-            <span class="col-md-2"></span>
-            <input v-model="input" class="form-control col-md-8" type="text" />
-            <span class="col-md-2"></span>
+            <span class="col-sm-1"></span>
+            <input v-model="input" id="input" class="form-control col-sm-10" placeholder="{{inputPlaceholder}}" type="text" />
+            <span class="col-sm-1"></span>
         </div>
         <h2>Todos</h2>
         <ul id="todos row">
